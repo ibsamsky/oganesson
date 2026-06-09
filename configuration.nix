@@ -1,0 +1,222 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+  imports = [
+    ./console.nix
+    ./hardware-configuration.nix
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  # use latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # btrfs mount options
+  fileSystems = {
+    "/".options = [ "compress=zstd" ];
+    "/home".options = [ "compress=zstd" ];
+    "/nix".options = [
+      "compress=zstd:5"
+      "noatime"
+    ];
+  };
+
+  # btrfs deduplication daemon
+  services.beesd.filesystems = {
+    root = {
+      spec = "UUID=633f5dce-3364-47bb-b14d-3f7024955ab6";
+      hashTableSizeMB = 128;
+      verbosity = "crit";
+    };
+  };
+
+  # enable zram swap and systemd-oomd
+  zramSwap.enable = true;
+  systemd.oomd = {
+    enable = true;
+
+    # from https://github.com/NixOS/nixpkgs/blob/nixos-26.05/nixos/modules/system/boot/systemd/oomd.nix: fedora defaults
+    enableRootSlice = true;
+    enableUserSlices = true;
+  };
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot = {
+    enable = true;
+
+    consoleMode = "auto";
+    netbootxyz.enable = true;
+  };
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "jupiter";
+
+  # Configure network connections interactively with nmcli or nmtui.
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+
+  # Select internationalisation properties.
+  # i18n.defaultLocale = "en_US.UTF-8";
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "vscode"
+    ];
+
+  programs = {
+    firefox = {
+      enable = true;
+      # don't pull in speechd
+      wrapperConfig.speechSynthesisSupport = false;
+    };
+
+    git = {
+      enable = true;
+      # system-level git config
+      config = {
+        core.compression = 8;
+        diff.algorithm = "minimal";
+        init.defaultBranch = "main";
+      };
+    };
+
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
+
+    vscode = {
+      enable = true;
+      # TODO: really, this should be home-manager'd (or equivalent)
+      extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+      ];
+    };
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+
+    # Configure keymap in X11
+    xkb = {
+      layout = "us";
+      options = "";
+    };
+  };
+  # VMWARE ONLY
+  virtualisation.vmware.guest.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
+
+  # display manager
+  services.greetd = {
+    enable = true;
+
+    useTextGreeter = true;
+    settings = {
+      default_session.command = "${lib.getExe pkgs.tuigreet} -t -r --remember-user-session --asterisks -g 'Welcome to NixOS!' -c $SHELL";
+    };
+  };
+
+  # desktops/compositors
+  services.desktopManager.gnome.enable = true;
+  programs = {
+    sway.enable = true;
+
+    niri = {
+      enable = true;
+      useNautilus = false;
+    };
+  };
+
+  # Enable CUPS to print documents.
+  # services.printing.enable = true;
+
+  # Enable sound.
+  # services.pulseaudio.enable = true;
+  # OR
+  # services.pipewire = {
+  #   enable = true;
+  #   pulse.enable = true;
+  # };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.libinput.enable = true;
+
+  users.users.cark = {
+    isNormalUser = true;
+    # TODO: agenix + hashedPasswordFile
+    initialHashedPassword = "$y$j9T$GOa6jtaMbTB.dmg1JCbk51$gsCZ1jTjhZzTCnIfTtEphlfJKp1i1rHCDpWXg4VDq61";
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’
+    packages = [ ];
+  };
+
+  # disable screen reader support
+  services.orca.enable = false;
+  services.speechd.enable = false;
+
+  # List packages installed in system profile.
+  # You can use https://search.nixos.org/ to find more packages (and options).
+  environment.systemPackages = with pkgs; [
+    broot
+    btop
+    compsize
+    fzf
+    ghostty
+    hyfetch
+    just
+    nil
+    nixfmt
+    tuigreet
+  ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  system.stateVersion = "26.05";
+}
