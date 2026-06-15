@@ -9,11 +9,16 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, ... }:
-    {
-      nixosConfigurations.jupiter = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
-      };
+    inputs:
+
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      imports = [
+        ./systems
+      ];
     };
 }

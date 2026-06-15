@@ -13,6 +13,8 @@
   imports = [
     ./console.nix
     ./hardware-configuration.nix
+    # toggle vm-specific options, remove for bare metal
+    ./vm.nix
   ];
 
   nix.settings.experimental-features = [
@@ -36,6 +38,7 @@
   # btrfs deduplication daemon
   services.beesd.filesystems = {
     root = {
+      # FIXME: hardware specific
       spec = "UUID=633f5dce-3364-47bb-b14d-3f7024955ab6";
       hashTableSizeMB = 128;
       verbosity = "crit";
@@ -66,7 +69,6 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
@@ -77,6 +79,7 @@
     dates = "weekly";
   };
 
+  # allow unfree packages as needed
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
@@ -124,12 +127,9 @@
       options = "";
     };
   };
-  # VMWARE ONLY
-  virtualisation.vmware.guest.enable = true;
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
   };
 
   # display manager
@@ -175,9 +175,14 @@
     packages = [ ];
   };
 
-  # disable screen reader support
-  services.orca.enable = false;
-  services.speechd.enable = false;
+  services = {
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+
+    # disable screen reader support
+    orca.enable = false;
+    speechd.enable = false;
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -202,21 +207,11 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   system.stateVersion = "26.05";
 }
