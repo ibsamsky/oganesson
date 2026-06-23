@@ -1,10 +1,16 @@
 { inputs, ... }:
 
+let
+  allSystems = [ "jupiter" ];
+  inherit (inputs.nixpkgs) lib;
+in
 {
-  flake.nixosConfigurations = {
-    # TODO: factor system builder function (doesn't matter right now bc only one system)
-    jupiter = inputs.nixpkgs.lib.nixosSystem {
-      modules = [ ./jupiter ];
-    };
-  };
+  flake.nixosConfigurations =
+    # surely there's a better way... :)
+    lib.genAttrs allSystems (
+      system:
+      lib.nixosSystem {
+        modules = [ (./. + "/${system}") ];
+      }
+    );
 }

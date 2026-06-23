@@ -49,3 +49,28 @@ since it allows _true_ reproducibility and avoids the issue of software rot.
 there are a couple of ways to have the same thing without flakes (niv, tack,
 `fetchTarball` if you feel like it, etc.) but they don't really achieve the
 same UX that flakes have.
+
+### rough edges
+
+by far the worst part of trying to get started with this whole thing was the
+documentation. for some reason, search engines boost random wiki articles and
+forum threads that are many years out of date. the official manual is massive
+and, infamously, not super noob-friendly. all told, there are at least 4(!)
+separate official documentation venues.
+
+i found that the most helpful thing to do was to jump into the REPL or an editor
+and just start trying shit. it helped me get comfortable with the language very
+quickly compared to reading alone.
+
+i will give credit where credit is due: once you have the Nix language basics
+down, it's great to be able to go into the source of every package and option
+and see plainly what they do. it's also nice to have a big ass manual that tells
+you everything (almost everything?) that can be configured. i don't know of any
+other distro that has something equivalent (besides Guix, maybe :P)
+
+### further reading
+
+* [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/introduction/) -
+  nice, fairly "gentle" introduction to NixOS, especially compared to the
+  manual, and up to date too. walks through configuring a system and also covers
+  some other important topics (e.g., the NixOS module system)
