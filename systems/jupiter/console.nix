@@ -8,8 +8,6 @@ let
       pkgs.runCommand "converted.json" { } ''${lib.getExe pkgs.yaml2json} < "${file}" > "$out"''
     );
 
-  scheme = importYAML "${pkgs.base16-schemes}/share/themes/chalk.yaml";
-
   hexDigit =
     i:
     if i < 10 then
@@ -24,7 +22,9 @@ let
         "F"
       ] (i - 10);
 
-  colors = map (i: lib.removePrefix "#" scheme.palette."base0${hexDigit i}") (lib.range 0 15);
+  mkScheme = name: importYAML "${pkgs.base16-schemes}/share/themes/${name}.yaml";
+  mkColors =
+    name: map (i: lib.removePrefix "#" (mkScheme name).palette."base0${hexDigit i}") (lib.range 0 15);
 in
 {
   environment.systemPackages = with pkgs; [
@@ -35,7 +35,7 @@ in
   console = {
     earlySetup = true;
 
-    inherit colors;
+    colors = mkColors "chalk";
     font = "cozette6x13";
 
     packages = with pkgs; [

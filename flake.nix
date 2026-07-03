@@ -2,9 +2,14 @@
   description = "flakey flake";
 
   inputs = {
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-26.05-small";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
