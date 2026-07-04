@@ -21,7 +21,7 @@ nix run github:nix-community/nixos-anywhere -- \
     --target-host root@<HOST>
 ```
 
-After installing, switch to config from main flake.
+After installing, switch to `neon`. Make sure to generate a hardware configuration!
 
 ## Reference
 

@@ -15,12 +15,13 @@
 
   nixpkgs.hostPlatform = "aarch64-linux";
 
-  boot.loader.grub = {
-    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-    # devices = [ ];
-    efiSupport = true;
-    efiInstallAsRemovable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+
+    consoleMode = "auto";
   };
+  boot.loader.efi.canTouchEfiVariables = true;
+
   services.openssh.enable = true;
 
   environment.systemPackages = map lib.lowPrio [
