@@ -13,10 +13,21 @@
     "flakes"
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  fileSystems = {
+    "/".options = [ "compress=zstd" ];
+    "/home".options = [ "compress=zstd" ];
+    "/nix".options = [
+      "compress=zstd:5"
+      "noatime"
+    ];
+  };
+
   services.beesd.filesystems = {
     root = {
       # FIXME: hardware specific
-      spec = "UUID=b9e0b86a-11a7-48c4-be67-9e869ac37241";
+      spec = "UUID=45f2741f-fde8-458c-8b5a-1c6246998fc7";
       hashTableSizeMB = 128;
       verbosity = "crit";
     };
@@ -87,6 +98,11 @@
     firewall = {
       allowPing = true;
     };
+  };
+
+  services.fail2ban = {
+    enable = true;
+    bantime-increment.rndtime = "2m";
   };
 
   system.stateVersion = "26.05";
