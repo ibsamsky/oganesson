@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -33,6 +34,8 @@
     };
   };
 
+  zramSwap.enable = true;
+
   boot.loader.systemd-boot = {
     enable = true;
     consoleMode = "auto";
@@ -45,6 +48,9 @@
   environment.systemPackages = with pkgs; [
     broot
     btop
+    # FIXME: module system guhhhhhh
+    inputs.mcdl.packages.${config.nixpkgs.hostPlatform.system}.mcdl
+    nh
     tmux
   ];
 
@@ -102,8 +108,21 @@
 
   services.fail2ban = {
     enable = true;
-    bantime-increment.rndtime = "2m";
+
+    bantime-increment = {
+      enable = true;
+      rndtime = "2m";
+      factor = "1.5";
+      formula = "ban.Time * (banFactor ** ban.Count)";
+    };
   };
+
+  boot.kernel.sysctl = {
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+  };
+
+  powerManagement.cpuFreqGovernor = "performance";
 
   system.stateVersion = "26.05";
 }

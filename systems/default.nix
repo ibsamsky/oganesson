@@ -18,7 +18,12 @@ in
     lib.genAttrs allSystems (
       system:
       lib.nixosSystem {
-        modules = [ (./. + "/${system}") ];
+        # HACK: refactor according to https://flake.parts/define-module-in-separate-file.html
+        # or some other method (i.e., use options to pass configs)
+        specialArgs = { inherit inputs; };
+        modules = [
+          (./. + "/${system}")
+        ];
       }
     )
     // lib.genAttrs' anywhereSystems (

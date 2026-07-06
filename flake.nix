@@ -11,6 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    mcdl = {
+      url = "github:ibsamsky/mcdl";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs =
@@ -25,5 +29,11 @@
       imports = [
         ./systems
       ];
+
+      perSystem = { ... }: {
+        checks = {
+          # TODO
+        };
+      };
     };
 }
