@@ -3,7 +3,16 @@
 {
   boot.kernelParams = [ "net.ifnames=0" ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+
+    authorizedKeysInHomedir = false;
+    settings = {
+      PasswordAuthentication = false;
+      # apply penalties to the entire /64 network block for IPv6, instead of the individual IP address
+      PerSourceNetBlockSize = "32:64";
+    };
+  };
 
   networking = {
     hostName = "neon";
@@ -19,6 +28,7 @@
     interfaces.eth0 = {
       ipv4.addresses = [
         {
+          # configured in OCI console
           address = "10.0.0.45";
           prefixLength = 24;
         }
