@@ -46,7 +46,7 @@ as i understand it, the main feature of flakes is that they can version their
 inputs by pinning them to a specific git hash. this seems like an obviously
 good idea coming from Rust and other programming languages with lockfiles,
 since it allows _true_ reproducibility and avoids the issue of software rot.
-there are a couple of ways to have the same thing without flakes (niv, tack,
+there are a couple of ways to have the same thing without flakes (npins, tack,
 `fetchTarball` if you feel like it, etc.) but they don't really achieve the
 same UX that flakes have.
 
