@@ -11,7 +11,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
 
     ./disko.nix
-    ../hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-linux";

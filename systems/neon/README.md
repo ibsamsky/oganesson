@@ -17,12 +17,13 @@ work, but binfmt_misc is ass (just run it on the same ISA).
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- \
-    --generate-hardware-config nixos-generate-config ./systems/neon/hardware-configuration.nix \
+    --generate-hardware-config nixos-generate-config ./systems/neon/install/hardware-configuration.nix \
     --flake .#neon-install \
     --target-host root@<HOST>
 ```
 
-After installing, switch to `neon`. Make sure to generate a hardware configuration! Remote rebuild:
+After installing, switch to `neon`. Make sure to copy the hardware configuration from `/install` to
+the parent dir. Remote rebuild:
 
 ```bash
 nix run nixpkgs#nixos-rebuild -- switch \

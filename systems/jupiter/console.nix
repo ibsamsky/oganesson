@@ -1,13 +1,11 @@
-{ lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
-  # IFD :(
-  importYAML =
-    file:
-    lib.importJSON (
-      pkgs.runCommand "converted.json" { } ''${lib.getExe pkgs.yaml2json} < "${file}" > "$out"''
-    );
-
   hexDigit =
     i:
     if i < 10 then
@@ -22,16 +20,11 @@ let
         "F"
       ] (i - 10);
 
-  mkScheme = name: importYAML "${pkgs.base16-schemes}/share/themes/${name}.yaml";
   mkColors =
-    name: map (i: lib.removePrefix "#" (mkScheme name).palette."base0${hexDigit i}") (lib.range 0 15);
+    name:
+    map (i: lib.removePrefix "#" inputs.self.scheme.${name}.palette."base0${hexDigit i}") (lib.range 0 15);
 in
 {
-  environment.systemPackages = with pkgs; [
-    base16-schemes
-    yaml2json
-  ];
-
   console = {
     earlySetup = true;
 

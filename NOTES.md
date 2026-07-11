@@ -65,8 +65,10 @@ quickly compared to reading alone.
 i will give credit where credit is due: once you have the Nix language basics
 down, it's great to be able to go into the source of every package and option
 and see plainly what they do. it's also nice to have a big ass manual that tells
-you everything (almost everything?) that can be configured. i don't know of any
-other distro that has something equivalent (besides Guix, maybe :P)
+you everything (almost everything?) that can be configured. in particular, this
+revealed many options belonging to Linux and common userland programs that i
+otherwise had no knowledge of. i don't know of any traditional distro that has
+something equivalent.
 
 ### further reading
 
@@ -74,3 +76,5 @@ other distro that has something equivalent (besides Guix, maybe :P)
   nice, fairly "gentle" introduction to NixOS, especially compared to the
   manual, and up to date too. walks through configuring a system and also covers
   some other important topics (e.g., the NixOS module system)
+* <https://jade.fyi/blog/flakes-arent-real/>
+* <https://edolstra.github.io/pubs/phd-thesis.pdf> :)
