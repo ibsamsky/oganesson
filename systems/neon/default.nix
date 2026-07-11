@@ -15,10 +15,17 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems = {
-    "/".options = [ "compress=zstd" ];
-    "/home".options = [ "compress=zstd" ];
+    "/".options = [
+      "compress=zstd"
+      "compress-force=zstd"
+    ];
+    "/home".options = [
+      "compress=zstd"
+      "compress-force=zstd"
+    ];
     "/nix".options = [
       "compress=zstd:5"
+      "compress-force=zstd:5"
       "noatime"
     ];
   };

@@ -25,16 +25,26 @@
               extraArgs = [ "-f" ];
 
               mountpoint = "/";
-              mountOptions = [ "compress=zstd" ];
+              mountOptions = [
+                "compress=zstd"
+                "compress-force=zstd"
+              ];
 
               subvolumes = {
                 home = {
                   mountpoint = "/home";
-                  mountOptions = [ "compress=zstd" ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "compress-force=zstd"
+                  ];
                 };
                 nix = {
                   mountpoint = "/nix";
-                  mountOptions = [ "compress=zstd:5" "noatime" ];
+                  mountOptions = [
+                    "compress=zstd:5"
+                    "compress-force=zstd:5"
+                    "noatime"
+                  ];
                 };
               };
             };
