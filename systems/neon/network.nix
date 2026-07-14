@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   boot.kernelParams = [ "net.ifnames=0" ];
 
