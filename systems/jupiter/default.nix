@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -6,12 +6,17 @@
     ./hardware-configuration.nix
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
+    
+    inputs.self.nixosModules.default
   ];
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  bikeshed.activation-diff.enable = true;
+  bikeshed.test.enable = true;
 
   # use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

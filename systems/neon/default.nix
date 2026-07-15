@@ -1,16 +1,20 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./minecraft.nix
     ./network.nix
+
+    inputs.self.nixosModules.default
   ];
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  bikeshed.activation-diff.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
