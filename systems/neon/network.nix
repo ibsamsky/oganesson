@@ -12,6 +12,8 @@
     };
   };
 
+  services.tailscale.enable = true;
+
   networking = {
     hostName = "neon";
     defaultGateway = "10.0.0.1";
