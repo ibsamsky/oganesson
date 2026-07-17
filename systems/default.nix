@@ -2,6 +2,7 @@
 
 let
   allSystems = [
+    "argon"
     "jupiter"
   ]
   ++ anywhereSystems;
