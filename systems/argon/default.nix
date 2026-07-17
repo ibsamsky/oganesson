@@ -20,9 +20,9 @@
     "flakes"
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   bikeshed.activation-diff.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   services.openssh = {
     enable = true;
@@ -36,12 +36,13 @@
   environment.systemPackages = with pkgs; [
     broot
     btop
+    gitMinimal
+    libva-utils
     nh
     tmux
   ];
 
   programs = {
-    git.enable = true;
     vim.enable = true;
     nix-ld.enable = true;
   };
