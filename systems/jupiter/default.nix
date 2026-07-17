@@ -16,7 +16,6 @@
   ];
 
   bikeshed.activation-diff.enable = true;
-  bikeshed.test.enable = true;
 
   # use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

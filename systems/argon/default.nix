@@ -1,6 +1,6 @@
 {
   modulesPath,
-  lib,
+  inputs,
   pkgs,
   ...
 }:
@@ -10,6 +10,9 @@
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
 
     ./hardware-configuration.nix
+    ./jellyfin.nix
+
+    inputs.self.nixosModules.default
   ];
 
   nix.settings.experimental-features = [
@@ -17,7 +20,9 @@
     "flakes"
   ];
 
-  zramSwap.enable = true;
+  nixpkgs.config.allowUnfree = true;
+
+  bikeshed.activation-diff.enable = true;
 
   services.openssh = {
     enable = true;
