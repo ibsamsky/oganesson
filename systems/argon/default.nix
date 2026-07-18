@@ -37,7 +37,6 @@
     broot
     btop
     gitMinimal
-    libva-utils
     nh
     tmux
   ];
