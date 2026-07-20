@@ -19,6 +19,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.auto-optimise-store = true;
 
   bikeshed.activation-diff.enable = true;
 
