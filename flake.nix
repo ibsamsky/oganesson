@@ -38,8 +38,7 @@
         ./flake
         ./systems
         # TODO: importTree
-        ./modules/nixos/activation-diff.nix
-        ./modules/nixos/test.nix
+        ./modules/nixos
       ];
 
       perSystem = { pkgs, ... }: {

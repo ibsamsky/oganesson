@@ -22,6 +22,10 @@
   nix.settings.auto-optimise-store = true;
 
   bikeshed.activation-diff.enable = true;
+  bikeshed.profiles.server = {
+    enable = true;
+    systemUser = "argon";
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -44,23 +48,12 @@
 
   programs = {
     vim.enable = true;
-    nix-ld.enable = true;
   };
 
   users.users = {
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZNPBrq6mhWKWuz3M+417DeZ9LEbkQNrmCSa4bWUNFX jupiter"
     ];
-
-    cark = {
-      isNormalUser = true;
-      initialHashedPassword = "$y$j9T$wJJV3tG/i9jFW2MMcb/Ju1$ZAwAYr2xFoJ9CTruw0XBaa6bXR5LU.HShyRa5R6xoV2";
-      extraGroups = [ "wheel" ];
-
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZNPBrq6mhWKWuz3M+417DeZ9LEbkQNrmCSa4bWUNFX jupiter"
-      ];
-    };
   };
 
   system.stateVersion = "26.05";

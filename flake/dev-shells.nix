@@ -11,8 +11,6 @@
           pkgs.statix
 
           pkgs.just
-          pkgs.jq
-          pkgs.yaml2json
 
           inputs'.agenix.packages.agenix
         ];

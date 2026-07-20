@@ -105,7 +105,6 @@
 
     vscode = {
       enable = true;
-      # TODO: really, this should be home-manager'd (or equivalent)
       extensions = with pkgs.vscode-extensions; [
         jnoortheen.nix-ide
       ];
@@ -148,9 +147,6 @@
     };
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
@@ -179,8 +175,6 @@
     speechd.enable = false;
   };
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     broot
     btop
@@ -193,18 +187,6 @@
     nixfmt
     tuigreet
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 
   system.stateVersion = "26.05";
 }
