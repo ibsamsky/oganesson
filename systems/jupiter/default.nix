@@ -1,4 +1,9 @@
-{ inputs, lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -6,7 +11,7 @@
     ./hardware-configuration.nix
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
-    
+
     inputs.self.nixosModules.default
   ];
 
@@ -49,6 +54,8 @@
     enableRootSlice = true;
     enableUserSlices = true;
   };
+
+  hardware.graphics.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
@@ -138,14 +145,13 @@
 
   # desktops/compositors
   services.desktopManager.gnome.enable = true;
-  programs = {
-    sway.enable = true;
-
-    niri = {
-      enable = true;
-      useNautilus = false;
-    };
+  programs.niri = {
+    enable = true;
+    useNautilus = false;
   };
+
+  # fix niri-session environment setup from greetd
+  systemd.user.services.niri.enableDefaultPath = false;
 
   # Enable sound.
   # services.pulseaudio.enable = true;
@@ -157,6 +163,10 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
+
+  security.polkit.enable = true;
+  security.pam.services.swaylock = { };
+  services.gnome.gnome-keyring.enable = true;
 
   users.users.cark = {
     isNormalUser = true;
@@ -176,16 +186,25 @@
   };
 
   environment.systemPackages = with pkgs; [
+    alacritty
     broot
     btop
     compsize
+    fuzzel
     fzf
     ghostty
     hyfetch
+    intel-media-driver    
     just
+    mako
     nil
     nixfmt
+    swayidle
+    swaylock
     tuigreet
+    vpl-gpu-rt  
+    waybar
+    xwayland-satellite
   ];
 
   system.stateVersion = "26.05";
