@@ -53,7 +53,6 @@
       intel-ocl
       intel-media-driver
       intel-compute-runtime-legacy1
-      libva-vdpau-driver # possibly not required
     ];
   };
 
@@ -61,4 +60,8 @@
     "render"
     "video"
   ];
+
+  services.caddy.virtualHosts."jf.direct.cark.moe".extraConfig = ''
+    reverse_proxy http://localhost:8096
+  '';
 }
