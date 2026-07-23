@@ -40,6 +40,8 @@
 
   services.caddy = {
     enable = true;
+    openFirewall = true;
+
     package = pkgs.caddy.withPlugins {
       # "github.com/caddyserver/cache-handler@v0.16.0"
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];

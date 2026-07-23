@@ -9,7 +9,7 @@
 
   services.jellyfin = {
     enable = true;
-    openFirewall = true; # TODO: reverse proxy
+    openFirewall = true; # even though it's proxied, this is useful for LAN access
 
     # apply the configuration here over what has been set in the web UI
     forceEncodingConfig = true;
