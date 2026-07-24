@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # https://wiki.nixos.org/wiki/Jellyfin
@@ -61,7 +66,43 @@
     "video"
   ];
 
+  # caddy reverse proxy definition
   services.caddy.virtualHosts."jf.direct.cark.moe".extraConfig = ''
     reverse_proxy http://localhost:8096
   '';
+
+  # fail2ban (https://jellyfin.org/docs/general/post-install/networking/advanced/fail2ban/)
+  environment.etc."fail2ban/filter.d/jellyfin.conf".text = ''
+    [Definition]
+    failregex = ^.*Authentication request for .* has been denied \(IP: "<ADDR>"\)\.$
+  '';
+
+  services.fail2ban.jails.jellyfin.settings = {
+    enabled = true;
+    backend = "auto";
+    port = "http,https";
+    protocol = "tcp";
+    filter = "jellyfin";
+    logpath = config.services.jellyfin.logDir + "/log_*.log";
+    maxretry = 3;
+    bantime = "1h";
+    findtime = "30m";
+  };
+
+  systemd.timers."fail2ban-jellyfin-reload" = {
+    description = "Reload Fail2Ban jellyfin jail";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "00:05";
+      Persistent = true;
+    };
+  };
+
+  systemd.services."fail2ban-jellyfin-reload" = {
+    description = "Reload Fail2Ban jellyfin jail";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${lib.getExe' pkgs.fail2ban "fail2ban-client"} reload jellyfin";
+    };
+  };
 }
