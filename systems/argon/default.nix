@@ -9,8 +9,9 @@
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
 
     ./hardware-configuration.nix
-    ./jellyfin.nix
     ./network.nix
+
+    ./services
   ];
 
   nix.settings.experimental-features = [
