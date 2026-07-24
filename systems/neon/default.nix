@@ -1,12 +1,10 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./minecraft.nix
     ./network.nix
-
-    inputs.self.nixosModules.default
   ];
 
   nix.settings.experimental-features = [

@@ -1,6 +1,5 @@
 {
   modulesPath,
-  inputs,
   pkgs,
   ...
 }:
@@ -11,8 +10,7 @@
 
     ./hardware-configuration.nix
     ./jellyfin.nix
-
-    inputs.self.nixosModules.default
+    ./network.nix
   ];
 
   nix.settings.experimental-features = [
@@ -21,7 +19,6 @@
   ];
   nix.settings.auto-optimise-store = true;
 
-  bikeshed.activation-diff.enable = true;
   bikeshed.profiles.server = {
     enable = true;
     systemUser = "argon";
@@ -29,29 +26,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.openssh = {
-    enable = true;
-
-    authorizedKeysInHomedir = false;
-    settings = {
-      PasswordAuthentication = false;
-    };
-  };
-
-  services.caddy = {
-    enable = true;
-    openFirewall = true;
-
-    package = pkgs.caddy.withPlugins {
-      # "github.com/caddyserver/cache-handler@v0.16.0"
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];
-      hash = "sha256-7GoH8YLCoPmPExQxoga2FHB58zQDoZVf1BBwkVi0SsQ=";
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     broot
-    btop
     gitMinimal
     nh
     tmux

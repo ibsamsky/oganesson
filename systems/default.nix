@@ -1,41 +1,40 @@
 { inputs, ... }:
 
 let
-  allSystems = [
-    "argon"
-    "jupiter"
-  ]
-  ++ anywhereSystems;
+  inherit (inputs.nixpkgs-unstable) lib;
 
-  anywhereSystems = [
-    "neon"
-  ];
+  defaultBuilder = inputs.nixpkgs.lib.nixosSystem;
+  serverBuilder = inputs.nixpkgs-small.lib.nixosSystem;
 
-  inherit (inputs.nixpkgs) lib;
+  allHosts = lib.attrNames (lib.filterAttrs (_: val: val == "directory") (builtins.readDir ./.));
+
+  configurations = lib.genAttrs allHosts (lib.const { }) // {
+    argon.builder = serverBuilder;
+    neon = {
+      anywhere = true;
+      builder = serverBuilder;
+    };
+  };
 in
 {
-  flake.nixosConfigurations =
-    # surely there's a better way... :)
-    lib.genAttrs allSystems (
-      system:
-      lib.nixosSystem {
-        # HACK: refactor according to https://flake.parts/define-module-in-separate-file.html
-        # or some other method (i.e., use options to pass configs)
+  flake.nixosConfigurations = lib.concatMapAttrs (
+    host: config:
+    {
+      ${host} = config.builder or defaultBuilder {
         specialArgs = { inherit inputs; };
         modules = [
-          (./. + "/${system}")
+          inputs.self.nixosModules.default
+          (./. + "/${host}")
         ];
-      }
-    )
-    // lib.genAttrs' anywhereSystems (
-      system:
-      lib.nameValuePair "${system}-install" (
-        lib.nixosSystem {
-          modules = [
-            inputs.disko.nixosModules.disko
-            (./. + "/${system}/install")
-          ];
-        }
-      )
-    );
+      };
+    }
+    // lib.optionalAttrs (config.anywhere or false) {
+      "${host}-install" = config.builder or defaultBuilder {
+        modules = [
+          inputs.disko.nixosModules.disko
+          (./. + "/${host}/install")
+        ];
+      };
+    }
+  ) configurations;
 }

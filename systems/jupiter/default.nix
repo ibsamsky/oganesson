@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
@@ -11,8 +10,6 @@
     ./hardware-configuration.nix
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
-
-    inputs.self.nixosModules.default
   ];
 
   nix.settings.experimental-features = [
