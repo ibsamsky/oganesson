@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   networking.firewall.enable = true;
@@ -9,6 +9,7 @@
     authorizedKeysInHomedir = false;
     settings = {
       PasswordAuthentication = false;
+      PermitRootLogin = "no";
     };
   };
 

@@ -40,11 +40,7 @@
     vim.enable = true;
   };
 
-  users.users = {
-    root.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZNPBrq6mhWKWuz3M+417DeZ9LEbkQNrmCSa4bWUNFX jupiter"
-    ];
-  };
+  users.users.argon.extraGroups = [ "wheel" ];
 
   system.stateVersion = "26.05";
 }
