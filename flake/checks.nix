@@ -8,11 +8,9 @@ let
   );
 in
 {
-  perSystem =
-    { self', ... }:
-    {
-      checks = flattenOneLevel {
-        inherit (self') devShells;
-      };
+  perSystem = { self', ... }: {
+    checks = flattenOneLevel {
+      inherit (self') devShells;
     };
+  };
 }

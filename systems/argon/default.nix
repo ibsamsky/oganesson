@@ -25,6 +25,8 @@
     systemUser = "argon";
   };
 
+  time.timeZone = "America/New_York";
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [

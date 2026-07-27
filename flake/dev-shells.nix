@@ -1,19 +1,13 @@
 {
-  perSystem =
-    {
-      pkgs,
-      inputs',
-      ...
-    }:
-    {
-      devShells.default = pkgs.mkShellNoCC {
-        packages = [
-          pkgs.statix
+  perSystem = { pkgs, inputs', ... }: {
+    devShells.default = pkgs.mkShellNoCC {
+      packages = [
+        pkgs.statix
 
-          pkgs.just
-
-          inputs'.agenix.packages.agenix
-        ];
-      };
+        pkgs.just
+        
+        inputs'.agenix.packages.agenix
+      ];
     };
+  };
 }
