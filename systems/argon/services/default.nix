@@ -1,6 +1,7 @@
 {
   imports = [
+    ./arr.nix
     ./jellyfin.nix
-    ./seerr.nix
+    ./qbittorrent.nix
   ];
 }

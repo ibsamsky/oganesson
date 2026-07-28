@@ -45,7 +45,7 @@ mp0: /mnt/data/jellyfin,mp=/mnt/data
 net0: name=eth0,bridge=vmbr0,firewall=1,gw=10.0.0.1,hwaddr=<MAC>,ip=10.100.0.1/8,ip6=dhcp,type=veth
 onboot: 1
 ostype: nixos
-rootfs: local-lvm:vm-100-disk-0,size=32G
+rootfs: local-lvm:vm-100-disk-0,size=64G
 swap: 2048
 unprivileged: 1
 ```
