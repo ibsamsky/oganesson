@@ -24,6 +24,10 @@
       url = "github:ibsamsky/mcdl";
       inputs.flake-parts.follows = "flake-parts";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -5,7 +5,7 @@
         pkgs.statix
 
         pkgs.just
-        
+
         inputs'.agenix.packages.agenix
       ];
     };

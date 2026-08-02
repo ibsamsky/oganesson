@@ -22,7 +22,9 @@ let
 
   mkColors =
     name:
-    map (i: lib.removePrefix "#" inputs.self.scheme.${name}.palette."base0${hexDigit i}") (lib.range 0 15);
+    map (i: lib.removePrefix "#" inputs.self.scheme.${name}.palette."base0${hexDigit i}") (
+      lib.range 0 15
+    );
 in
 {
   console = {

@@ -186,20 +186,18 @@
     alacritty
     broot
     btop
-    compsize
+    direnv
     fuzzel
     fzf
     ghostty
-    hyfetch
-    intel-media-driver    
-    just
+    intel-media-driver
     mako
     nil
-    nixfmt
+    nix-direnv
     swayidle
     swaylock
     tuigreet
-    vpl-gpu-rt  
+    vpl-gpu-rt
     waybar
     xwayland-satellite
   ];
