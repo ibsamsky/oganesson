@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-26.04
+          - os: ubuntu-24.04
             system: x86_64-linux
-          - os: ubuntu-26.04-arm
+          - os: ubuntu-24.04-arm
             system: aarch64-linux
 
     runs-on: ${{ matrix.os }}
@@ -33,9 +33,11 @@ jobs:
 
           df -h
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: NixOS/nix-installer-action@main
+      - uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # v1.0.0
 
       - name: Nix version
         run: nix --version
