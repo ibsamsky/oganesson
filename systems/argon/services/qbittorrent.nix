@@ -4,7 +4,7 @@
   services.qbittorrent = {
     enable = true;
 
-    openFirewall = true;
+    # we DON'T need to open the firewall (UPnP works fine)
 
     serverConfig = {
       BitTorrent = {

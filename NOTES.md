@@ -72,9 +72,9 @@ something equivalent.
 
 ### further reading
 
-* [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/introduction/) -
+- [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/introduction/) -
   nice, fairly "gentle" introduction to NixOS, especially compared to the
   manual, and up to date too. walks through configuring a system and also covers
   some other important topics (e.g., the NixOS module system)
-* <https://jade.fyi/blog/flakes-arent-real/>
-* <https://edolstra.github.io/pubs/phd-thesis.pdf> :)
+- <https://jade.fyi/blog/flakes-arent-real/>
+- <https://edolstra.github.io/pubs/phd-thesis.pdf> :)

@@ -34,5 +34,5 @@ nix run nixpkgs#nixos-rebuild -- switch \
 
 ## Reference
 
-* [NixOS Wiki article](https://wiki.nixos.org/wiki/Install_NixOS_on_Oracle_Cloud)
-* [nixos-anywhere book](https://nix-community.github.io/nixos-anywhere/)
+- [NixOS Wiki article](https://wiki.nixos.org/wiki/Install_NixOS_on_Oracle_Cloud)
+- [nixos-anywhere book](https://nix-community.github.io/nixos-anywhere/)

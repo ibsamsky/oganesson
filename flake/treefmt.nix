@@ -10,6 +10,10 @@
         deadnix.enable = true;
         just.enable = true;
         nixfmt.enable = true;
+        oxfmt = {
+          enable = true;
+          includes = [ "*.md" ];
+        };
       };
     };
   };
