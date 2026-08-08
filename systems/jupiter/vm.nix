@@ -7,7 +7,7 @@
     vmVariant = {
       virtualisation = {
         memorySize = 3 * 1024;
-        cores = 4;
+        cores = 8;
       };
     };
   };
