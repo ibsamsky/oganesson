@@ -4,10 +4,10 @@
   flake.nixosModules.default =
     { config, ... }:
     let
-      cfg = config.bikeshed.profiles.server;
+      cfg = config.oganesson.profiles.server;
     in
     {
-      options.bikeshed.profiles.server = {
+      options.oganesson.profiles.server = {
         enable = lib.mkEnableOption "common configurations for server systems";
         systemUser = lib.mkOption {
           type = lib.types.str;

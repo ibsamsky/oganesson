@@ -17,7 +17,7 @@
     "flakes"
   ];
 
-  bikeshed.activation-diff.enable = true;
+  oganesson.activation-diff.enable = true;
 
   # use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;

@@ -12,8 +12,8 @@
     "flakes"
   ];
 
-  bikeshed.activation-diff.enable = true;
-  bikeshed.profiles.server.enable = true;
+  oganesson.activation-diff.enable = true;
+  oganesson.profiles.server.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

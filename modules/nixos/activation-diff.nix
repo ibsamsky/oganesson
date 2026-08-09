@@ -9,10 +9,10 @@
     # normal module args
     { config, ... }:
     let
-      cfg = config.bikeshed.activation-diff;
+      cfg = config.oganesson.activation-diff;
     in
     {
-      options.bikeshed.activation-diff = {
+      options.oganesson.activation-diff = {
         enable = lib.mkEnableOption "configuration diff on activation";
       };
 

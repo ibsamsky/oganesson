@@ -5,10 +5,10 @@
   flake.nixosModules.default =
     { config, ... }:
     let
-      cfg = config.bikeshed.test;
+      cfg = config.oganesson.test;
     in
     {
-      options.bikeshed.test = {
+      options.oganesson.test = {
         enable = lib.mkEnableOption "test module";
       };
 

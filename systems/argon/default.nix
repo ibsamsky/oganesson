@@ -20,7 +20,7 @@
   ];
   nix.settings.auto-optimise-store = true;
 
-  bikeshed.profiles.server = {
+  oganesson.profiles.server = {
     enable = true;
     systemUser = "argon";
   };
