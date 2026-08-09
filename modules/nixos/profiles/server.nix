@@ -12,7 +12,7 @@
         systemUser = lib.mkOption {
           type = lib.types.str;
           default = config.networking.hostName;
-          defaultText = "config.networking.hostName";
+          defaultText = lib.literalExpression "config.networking.hostName";
           description = "The unprivileged user to be used for most operations on the server.";
         };
       };
