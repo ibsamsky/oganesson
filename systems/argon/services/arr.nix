@@ -1,6 +1,15 @@
 { config, ... }:
 
 {
+  users.groups.media.members =
+    let
+      svc = config.services;
+    in
+    [
+      svc.radarr.user
+      svc.sonarr.user
+    ];
+
   services.seerr.enable = true;
 
   services.caddy.virtualHosts."request.cark.moe".extraConfig = ''

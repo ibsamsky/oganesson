@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
+  users.groups.media.members = [ config.services.qbittorrent.user ];
+
   services.qbittorrent = {
     enable = true;
 

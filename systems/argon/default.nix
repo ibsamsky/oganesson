@@ -40,7 +40,12 @@
     vim.enable = true;
   };
 
-  users.users.argon.extraGroups = [ "wheel" ];
+  users.users.argon.extraGroups = [
+    "media"
+    "wheel"
+  ];
+
+  users.groups.media.gid = 2000;
 
   system.stateVersion = "26.05";
 }

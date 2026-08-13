@@ -62,6 +62,7 @@
   };
 
   users.users.jellyfin.extraGroups = [
+    "media" # access to media files
     "render"
     "video"
   ];
