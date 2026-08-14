@@ -36,5 +36,10 @@
     };
   };
 
+  # allow group write access to downloads (for hardlinking to library)
+  systemd.services.qbittorrent.serviceConfig = {
+    Umask = "0007";
+  };
+
   # TODO: vpn config
 }
