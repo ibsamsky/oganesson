@@ -11,13 +11,13 @@
     serverConfig = {
       BitTorrent = {
         Session = {
-          AddTrackersFromURLEnabled = true;
-          AnonymousModeEnabled = true;
-          AdditionalTrackersURL = "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt";
-          GlobalMaxRatio = 2;
-          GlobalMaxSeedingMinutes = 4320; # 72 hours
+          DefaultSavePath = "/mnt/media/download";
+          DisableAutoTMMByDefault = false;
+          DisableAutoTMMTriggers = {
+            CategorySavePathChanged = false;
+            DefaultSavePathChanged = false;
+          };
           QueueingSystemEnabled = false;
-          ShareLimitAction = "Remove";
         };
       };
 

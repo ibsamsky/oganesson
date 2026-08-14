@@ -21,6 +21,11 @@
     fsType = "fuse.mergerfs";
   };
 
+  fileSystems."/mnt/media" = {
+    device = "mergerfs";
+    fsType = "fuse.mergerfs";
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
