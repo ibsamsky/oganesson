@@ -45,6 +45,8 @@
     "wheel"
   ];
 
+  virtualisation.oci-containers.backend = "podman";
+
   users.groups.media.gid = 2000;
 
   system.stateVersion = "26.05";

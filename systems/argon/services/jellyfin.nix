@@ -69,7 +69,7 @@
 
   # caddy reverse proxy definition
   services.caddy.virtualHosts."jf.direct.cark.moe".extraConfig = ''
-    reverse_proxy http://localhost:8096
+    reverse_proxy http://127.0.0.1:8096
   '';
 
   # fail2ban (https://jellyfin.org/docs/general/post-install/networking/advanced/fail2ban/)
