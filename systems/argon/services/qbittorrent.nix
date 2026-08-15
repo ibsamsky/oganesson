@@ -17,7 +17,14 @@
             CategorySavePathChanged = false;
             DefaultSavePathChanged = false;
           };
+          MaxConnections = -1;
+          MaxConnectionsPerTorrent = 50;
+          MaxUploads = 75;
+          MaxUploadsPerTorrent = -1;
           QueueingSystemEnabled = false;
+          SendBufferLowWatermark = 200;
+          SendBufferWatermark = 1000;
+          SendBufferWatermarkFactor = 150;
         };
       };
 
@@ -38,7 +45,7 @@
 
   # allow group write access to downloads (for hardlinking to library)
   systemd.services.qbittorrent.serviceConfig = {
-    Umask = "0007";
+    UMask = "0007";
   };
 
   # TODO: vpn config
