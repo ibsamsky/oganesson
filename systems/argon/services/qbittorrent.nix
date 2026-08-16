@@ -22,8 +22,8 @@
           MaxUploads = 75;
           MaxUploadsPerTorrent = -1;
           QueueingSystemEnabled = false;
-          SendBufferLowWatermark = 200;
-          SendBufferWatermark = 1000;
+          SendBufferLowWatermark = 512;
+          SendBufferWatermark = 4096;
           SendBufferWatermarkFactor = 150;
         };
       };
