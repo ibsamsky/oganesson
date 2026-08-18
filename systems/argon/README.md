@@ -41,10 +41,11 @@ arch: amd64
 cores: 5
 dev0: /dev/dri/renderD128,gid=303
 dev1: /dev/dri/card0,gid=26
+dev2: /dev/net/tun
 features: nesting=1
 hostname: argon
 memory: 4096
-mp0: /mnt/data/jellyfin,mp=/mnt/data
+mp0: /mnt/data/argon-media,mp=/mnt/media
 net0: name=eth0,bridge=vmbr0,firewall=1,gw=10.0.0.1,hwaddr=<MAC>,ip=10.100.0.1/8,ip6=dhcp,type=veth
 onboot: 1
 ostype: nixos
