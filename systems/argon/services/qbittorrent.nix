@@ -3,10 +3,12 @@
 {
   users.groups.media.members = [ config.services.qbittorrent.user ];
 
+  networking.firewall.allowedTCPPorts = [ 6881 ];
+  networking.firewall.allowedUDPPorts = [ 6881 ];
+
   services.qbittorrent = {
     enable = true;
-
-    # we DON'T need to open the firewall (UPnP works fine)
+    torrentingPort = 6881;
 
     serverConfig = {
       BitTorrent = {
