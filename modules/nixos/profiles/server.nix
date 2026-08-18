@@ -41,6 +41,12 @@
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZNPBrq6mhWKWuz3M+417DeZ9LEbkQNrmCSa4bWUNFX jupiter"
           ];
         };
+
+        # better TCP congestion control
+        boot.kernel.sysctl = {
+          "net.core.default_qdisc" = "fq";
+          "net.ipv4.tcp_congestion_control" = "bbr";
+        };
       };
     };
 }

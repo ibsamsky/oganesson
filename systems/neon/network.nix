@@ -47,9 +47,4 @@
       formula = "ban.Time * (banFactor ** ban.Count)";
     };
   };
-
-  boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_congestion_control" = "bbr";
-  };
 }
