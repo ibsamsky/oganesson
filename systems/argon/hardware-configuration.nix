@@ -16,11 +16,6 @@
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/data" = {
-    device = "mergerfs";
-    fsType = "fuse.mergerfs";
-  };
-
   fileSystems."/mnt/media" = {
     device = "mergerfs";
     fsType = "fuse.mergerfs";
