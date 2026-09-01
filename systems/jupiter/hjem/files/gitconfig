@@ -1,0 +1,13 @@
+[core]
+    pager = bat --plain --pager 'less -RF -+X'
+    compression = 8
+[diff]
+    algorithm = minimal
+    colorMoved = dimmed-zebra
+    colorMovedWS = allow-indentation-change
+[init]
+    defaultBranch = main
+[merge]
+    conflictStyle = zdiff3
+[rerere]
+    enabled = true

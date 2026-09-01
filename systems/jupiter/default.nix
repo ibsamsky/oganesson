@@ -9,6 +9,7 @@
     ./console.nix
     ./desktop.nix
     ./hardware-configuration.nix
+    ./hjem
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
   ];
@@ -124,14 +125,6 @@
     };
   };
 
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -156,14 +149,25 @@
     speechd.enable = false;
   };
 
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
+    bat
     broot
     btop
     direnv
-    fzf
+    eza
+    fd
     intel-media-driver
     nix-direnv
+    ripgrep
     vpl-gpu-rt
+    zoxide
   ];
 
   system.stateVersion = "26.05";

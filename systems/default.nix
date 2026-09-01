@@ -23,6 +23,7 @@ in
       ${host} = config.builder or defaultBuilder {
         specialArgs = { inherit inputs; };
         modules = [
+          inputs.hjem.nixosModules.default
           inputs.self.nixosModules.default
           (./. + "/${host}")
         ];
