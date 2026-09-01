@@ -4,7 +4,6 @@
 {
   flake.nixosModules.default = moduleWithSystem (
     # perSystem args
-    # FIXME?: pkgs not configurable...?
     { pkgs, ... }:
     # normal module args
     { config, ... }:

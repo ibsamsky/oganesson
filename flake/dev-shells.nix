@@ -1,10 +1,11 @@
 {
   perSystem = { pkgs, inputs', ... }: {
     devShells.default = pkgs.mkShellNoCC {
-      packages = [
-        pkgs.statix
+      packages = with pkgs; [
+        nil
+        statix
 
-        pkgs.just
+        just
 
         inputs'.agenix.packages.agenix
       ];

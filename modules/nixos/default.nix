@@ -1,7 +1,7 @@
 {
   imports = [
+    ./profiles
     ./activation-diff.nix
     ./test.nix
-    ./profiles/server.nix
   ];
 }

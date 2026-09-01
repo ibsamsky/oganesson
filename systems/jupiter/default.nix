@@ -7,6 +7,7 @@
 {
   imports = [
     ./console.nix
+    ./desktop.nix
     ./hardware-configuration.nix
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
@@ -18,6 +19,7 @@
   ];
 
   oganesson.activation-diff.enable = true;
+  oganesson.profiles.graphical.enable = true;
 
   # use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -70,9 +72,6 @@
 
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -115,21 +114,6 @@
     };
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      options = "";
-    };
-  };
-
-  xdg.portal = {
-    enable = true;
-  };
-
   # display manager
   services.greetd = {
     enable = true;
@@ -139,16 +123,6 @@
       default_session.command = "${lib.getExe pkgs.tuigreet} -t -r --remember-user-session --asterisks -g 'Welcome to NixOS!' -c $SHELL";
     };
   };
-
-  # desktops/compositors
-  services.desktopManager.gnome.enable = true;
-  programs.niri = {
-    enable = true;
-    useNautilus = false;
-  };
-
-  # fix niri-session environment setup from greetd
-  systemd.user.services.niri.enableDefaultPath = false;
 
   # Enable sound.
   # services.pulseaudio.enable = true;
@@ -183,23 +157,13 @@
   };
 
   environment.systemPackages = with pkgs; [
-    alacritty
     broot
     btop
     direnv
-    fuzzel
     fzf
-    ghostty
     intel-media-driver
-    mako
-    nil
     nix-direnv
-    swayidle
-    swaylock
-    tuigreet
     vpl-gpu-rt
-    waybar
-    xwayland-satellite
   ];
 
   system.stateVersion = "26.05";
