@@ -140,14 +140,8 @@
     packages = [ ];
   };
 
-  services = {
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
-
-    # disable screen reader support
-    orca.enable = false;
-    speechd.enable = false;
-  };
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   services.pipewire = {
     enable = true;
