@@ -42,6 +42,11 @@ jobs:
       - name: Nix version
         run: nix --version
 
+      - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        with:
+          name: cark
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
       - name: Run flake checks
         run: |
           nix flake check \
