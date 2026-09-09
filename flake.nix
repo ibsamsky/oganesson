@@ -15,6 +15,10 @@
         nixpkgs.follows = "nixpkgs-unstable";
       };
     };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -46,6 +50,8 @@
       ];
 
       imports = [
+        inputs.agenix-rekey.flakeModule
+
         ./flake
         ./systems
         # TODO: importTree

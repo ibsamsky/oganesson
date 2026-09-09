@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -19,8 +15,12 @@
     "flakes"
   ];
 
-  oganesson.activation-diff.enable = true;
-  oganesson.profiles.graphical.enable = true;
+  oganesson = {
+    activation-diff.enable = true;
+    profiles.graphical.enable = true;
+    # TODO: replace with real key
+    secrets.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0XgdKFFKkfZIlDDUz9oRjO31MLlRVrVsU7DwpU0rZd jupiter";
+  };
 
   # use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -79,11 +79,7 @@
   };
 
   # allow unfree packages as needed
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "vscode"
-    ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
 
   programs = {
     firefox = {
@@ -109,9 +105,7 @@
 
     vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-      ];
+      extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
     };
   };
 

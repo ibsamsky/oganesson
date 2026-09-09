@@ -12,8 +12,11 @@
     "flakes"
   ];
 
-  oganesson.activation-diff.enable = true;
-  oganesson.profiles.server.enable = true;
+  oganesson = {
+    activation-diff.enable = true;
+    profiles.server.enable = true;
+    secrets.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLt8ez3HZ2tTkwimbemwDzvcAKxtfqxxZ9G4T13nSGe neon";
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

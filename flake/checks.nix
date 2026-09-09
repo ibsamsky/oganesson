@@ -24,11 +24,6 @@ in
       };
     in
     {
-      checks = flattenOneLevel (
-        configs
-        // {
-          inherit (self') devShells;
-        }
-      );
+      checks = flattenOneLevel (configs // { inherit (self') devShells; });
     };
 }

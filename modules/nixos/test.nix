@@ -8,12 +8,8 @@
       cfg = config.oganesson.test;
     in
     {
-      options.oganesson.test = {
-        enable = lib.mkEnableOption "test module";
-      };
+      options.oganesson.test.enable = lib.mkEnableOption "test module";
 
-      config = lib.mkIf cfg.enable {
-        time.timeZone = lib.mkForce "America/Chicago";
-      };
+      config = lib.mkIf cfg.enable { time.timeZone = lib.mkForce "America/Chicago"; };
     };
 }

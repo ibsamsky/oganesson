@@ -6,19 +6,7 @@
 }:
 
 let
-  hexDigit =
-    i:
-    if i < 10 then
-      toString i
-    else
-      builtins.elemAt [
-        "A"
-        "B"
-        "C"
-        "D"
-        "E"
-        "F"
-      ] (i - 10);
+  hexDigit = i: if i < 10 then toString i else builtins.elemAt [ "A" "B" "C" "D" "E" "F" ] (i - 10);
 
   mkColors =
     name:
@@ -33,8 +21,6 @@ in
     colors = mkColors "chalk";
     font = "cozette6x13";
 
-    packages = with pkgs; [
-      cozette
-    ];
+    packages = with pkgs; [ cozette ];
   };
 }

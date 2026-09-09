@@ -13,12 +13,8 @@
 
       config = lib.mkIf cfg.enable {
         nix.settings = {
-          substituters = [
-            "https://cark.cachix.org"
-          ];
-          trusted-public-keys = [
-            "cark.cachix.org-1:Ze1WxAMGwBLypgd0qLqM2JIVTGSBPtVyreJyUu4UqXk="
-          ];
+          substituters = [ "https://cark.cachix.org" ];
+          trusted-public-keys = [ "cark.cachix.org-1:Ze1WxAMGwBLypgd0qLqM2JIVTGSBPtVyreJyUu4UqXk=" ];
         };
       };
     };

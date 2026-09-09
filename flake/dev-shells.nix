@@ -1,5 +1,5 @@
 {
-  perSystem = { pkgs, inputs', ... }: {
+  perSystem = { config, pkgs, ... }: {
     devShells.default = pkgs.mkShellNoCC {
       packages = with pkgs; [
         nil
@@ -7,7 +7,7 @@
 
         just
 
-        inputs'.agenix.packages.agenix
+        config.agenix-rekey.package
       ];
     };
   };

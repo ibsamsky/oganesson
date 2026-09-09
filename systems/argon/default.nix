@@ -1,8 +1,4 @@
-{
-  modulesPath,
-  pkgs,
-  ...
-}:
+{ modulesPath, pkgs, ... }:
 
 {
   imports = [
@@ -20,9 +16,15 @@
   ];
   nix.settings.auto-optimise-store = true;
 
-  oganesson.profiles.server = {
-    enable = true;
-    systemUser = "argon";
+  oganesson = {
+    profiles.server = {
+      enable = true;
+      systemUser = "argon";
+    };
+    secrets = {
+      hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBc8zH7EQw4BvS2Glfc+1VfTHFiOcgY++HIy9TIDJea argon";
+      storageName = "argon";
+    };
   };
 
   time.timeZone = "America/New_York";
