@@ -58,14 +58,9 @@
         ];
       };
 
-      # mkpasswd -m yescrypt 'password' | agenix edit secrets/cark-password-hash.age
-      # age.secrets.cark-password-hash.rekeyFile = inputs.self + "/secrets/cark-password-hash.age";
-      #
       # age.secrets.neon-root-password = {
       #   rekeyFile = inputs.self + "/secrets/neon-root-password.age";
       #   generator.script = "alnum";
       # };
-      #
-      # users.users.cark.hashedPasswordFile = config.age.secrets.cark-password-hash.path;
     };
 }

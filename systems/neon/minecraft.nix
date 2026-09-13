@@ -11,11 +11,13 @@
 
   programs.nix-ld.enable = true;
 
+  age.secrets.mcdl-restic-password.rekeyFile = ./secrets/mcdl-restic-password.age;
+
   services.restic.backups.mcdl = {
     initialize = true;
     paths = [ "/root/.local/share/mcdl/instance" ];
     repository = "sftp:neon-backup@pve.cloudforest-alewife.ts.net:/mnt/data/mc/neon-mcdl";
-    passwordFile = "/var/lib/secrets/restic-mcdl-password";
+    passwordFile = config.age.secrets.mcdl-restic-password.path;
     timerConfig.OnCalendar = "daily";
     pruneOpts = [
       "--keep-daily 7"
