@@ -20,6 +20,7 @@
     passwordFile = config.age.secrets.mcdl-restic-password.path;
     timerConfig.OnCalendar = "daily";
     pruneOpts = [
+      "--max-unused 5%"
       "--keep-daily 7"
       "--keep-weekly 4"
       "--keep-monthly 6"
