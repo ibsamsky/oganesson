@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../modules/nixos/mixins/btrfs.nix
     ./console.nix
     ./desktop.nix
     ./hardware-configuration.nix
@@ -33,16 +34,6 @@
       "compress=zstd:5"
       "noatime"
     ];
-  };
-
-  # btrfs deduplication daemon
-  services.beesd.filesystems = {
-    root = {
-      # FIXME: hardware specific
-      spec = "UUID=633f5dce-3364-47bb-b14d-3f7024955ab6";
-      hashTableSizeMB = 128;
-      verbosity = "crit";
-    };
   };
 
   # enable zram swap and systemd-oomd

@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../modules/nixos/mixins/btrfs.nix
     ./hardware-configuration.nix
     ./minecraft.nix
     ./network.nix
@@ -27,15 +28,6 @@
       "compress-force=zstd:5"
       "noatime"
     ];
-  };
-
-  services.beesd.filesystems = {
-    root = {
-      # FIXME: hardware specific
-      spec = "UUID=45f2741f-fde8-458c-8b5a-1c6246998fc7";
-      hashTableSizeMB = 128;
-      verbosity = "crit";
-    };
   };
 
   zramSwap.enable = true;
