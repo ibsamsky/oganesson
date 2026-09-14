@@ -6,7 +6,6 @@
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-26.05-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # TODO: look at agenix-rekey for more features
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {

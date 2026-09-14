@@ -135,6 +135,13 @@
     wireplumber.enable = true;
   };
 
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  services.power-profiles-daemon.enable = true;
+
+  services.fwupd.enable = true;
+
   environment.systemPackages = with pkgs; [
     bat
     broot
