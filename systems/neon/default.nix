@@ -8,11 +8,6 @@
     ./network.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   oganesson = {
     activation-diff.enable = true;
     profiles.server.enable = true;

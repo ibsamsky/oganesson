@@ -9,4 +9,8 @@
   };
 
   services.btrfs.autoScrub.enable = lib.mkDefault true;
+
+  # useless because of bees
+  nix.settings.auto-optimise-store = lib.mkForce false;
+  nix.optimise.automatic = lib.mkForce false;
 }

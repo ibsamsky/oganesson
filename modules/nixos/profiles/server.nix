@@ -20,6 +20,16 @@
       config = lib.mkIf cfg.enable {
         documentation.enable = false;
 
+        nix.settings = {
+          auto-optimise-store = false;
+          min-free = lib.mkDefault (1024 * 1024 * 1024); # 1G
+        };
+
+        nix.optimise = {
+          automatic = true;
+          dates = [ "04:00" ];
+        };
+
         nix.gc = {
           automatic = lib.mkDefault config.nix.enable;
           dates = lib.mkDefault "*/6:00"; # every 6 hours
@@ -30,7 +40,9 @@
           enable = true;
 
           dates = "hourly";
+          randomizedDelaySec = "10m";
           flake = "github:ibsamsky/oganesson";
+          channel = null;
         };
 
         # unprivileged user for most operations

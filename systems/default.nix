@@ -23,8 +23,16 @@ in
       ${host} = config.builder or defaultBuilder {
         specialArgs = { inherit inputs; };
         modules = [
+          {
+            nix.settings.experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+          }
+
           inputs.hjem.nixosModules.default
           inputs.self.nixosModules.default
+
           (./. + "/${host}")
         ];
       };

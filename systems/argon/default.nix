@@ -10,12 +10,6 @@
     ./services
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.auto-optimise-store = true;
-
   oganesson = {
     profiles.server = {
       enable = true;
@@ -28,6 +22,14 @@
   };
 
   time.timeZone = "America/New_York";
+
+  system.autoUpgrade = {
+    allowReboot = true;
+    rebootWindow = {
+      lower = "03:00";
+      upper = "05:00";
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 

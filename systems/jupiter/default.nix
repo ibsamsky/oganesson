@@ -11,11 +11,6 @@
     ./vm.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   oganesson = {
     activation-diff.enable = true;
     profiles.graphical.enable = true;
@@ -63,11 +58,6 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-  };
 
   # allow unfree packages as needed
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
