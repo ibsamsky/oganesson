@@ -1,7 +1,14 @@
-{ lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
+    inputs.self.nixosModules.hyfetch
+
     ../../modules/nixos/mixins/btrfs.nix
     ./console.nix
     ./desktop.nix
@@ -131,6 +138,8 @@
   services.power-profiles-daemon.enable = true;
 
   services.fwupd.enable = true;
+
+  wrappers.hyfetch.enable = true;
 
   environment.systemPackages = with pkgs; [
     bat
