@@ -1,14 +1,7 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 
 {
   imports = [
-    inputs.self.nixosModules.hyfetch
-
     ../../modules/nixos/mixins/btrfs.nix
     ./console.nix
     ./desktop.nix
@@ -76,16 +69,6 @@
       wrapperConfig.speechSynthesisSupport = false;
     };
 
-    git = {
-      enable = true;
-      # system-level git config
-      config = {
-        core.compression = 8;
-        diff.algorithm = "minimal";
-        init.defaultBranch = "main";
-      };
-    };
-
     vim = {
       enable = true;
       defaultEditor = true;
@@ -139,7 +122,7 @@
 
   services.fwupd.enable = true;
 
-  wrappers.hyfetch.enable = true;
+  wrappers = lib.genAttrs [ "git" "hyfetch" ] (lib.const { enable = true; });
 
   environment.systemPackages = with pkgs; [
     bat

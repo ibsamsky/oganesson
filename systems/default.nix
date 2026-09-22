@@ -6,7 +6,7 @@ let
   defaultBuilder = inputs.nixpkgs.lib.nixosSystem;
   serverBuilder = inputs.nixpkgs-small.lib.nixosSystem;
 
-  allHosts = lib.attrNames (lib.filterAttrs (_: val: val == "directory") (builtins.readDir ./.));
+  allHosts = lib.attrNames (lib.filterAttrs (_: ty: ty == "directory") (builtins.readDir ./.));
 
   configurations = lib.genAttrs allHosts (lib.const { }) // {
     argon.builder = serverBuilder;
@@ -31,10 +31,10 @@ in
           }
 
           inputs.hjem.nixosModules.default
-          self.nixosModules.default
 
           (./. + "/${host}")
-        ];
+        ]
+        ++ builtins.attrValues self.nixosModules;
       };
     }
     // lib.optionalAttrs (config.anywhere or false) {
