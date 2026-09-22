@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 
 let
   inherit (inputs.nixpkgs-unstable) lib;
@@ -31,7 +31,7 @@ in
           }
 
           inputs.hjem.nixosModules.default
-          inputs.self.nixosModules.default
+          self.nixosModules.default
 
           (./. + "/${host}")
         ];

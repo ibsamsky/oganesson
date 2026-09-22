@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  self,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   flake.nixosModules.default =
@@ -40,14 +45,14 @@
           storageMode = "local";
           masterIdentities = [
             {
-              identity = inputs.self + "/secrets/master-key.age";
+              identity = "${self}/secrets/master-key.age";
               pubkey = "age1kj8s5c0ryynpqqn77fh7aakg3hxmtvy8ex8kvjyhgywj9eqnuumsm05mz4";
             }
           ];
         }
         // (lib.optionalAttrs (cfg.hostPubkey != "") {
           hostPubkey = cfg.hostPubkey;
-          localStorageDir = inputs.self + "/secrets/rekeyed/${cfg.storageName}";
+          localStorageDir = "${self}/secrets/rekeyed/${cfg.storageName}";
         });
 
         assertions = [
@@ -59,7 +64,7 @@
       };
 
       # age.secrets.neon-root-password = {
-      #   rekeyFile = inputs.self + "/secrets/neon-root-password.age";
+      #   rekeyFile = self + "/secrets/neon-root-password.age";
       #   generator.script = "alnum";
       # };
     };
