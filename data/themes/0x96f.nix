@@ -1,0 +1,24 @@
+{
+  author = "Filip Janevski (https://0x96f.dev/theme)";
+  name = "0x96f";
+  palette = {
+    base00 = "262427";
+    base01 = "3B393C";
+    base02 = "514F52";
+    base03 = "676567";
+    base04 = "7C7B7D";
+    base05 = "FCFCFC";
+    base06 = "EAE9EB";
+    base07 = "FCFCFC";
+    base08 = "FF7272";
+    base09 = "FC9D6F";
+    base0A = "FFCA58";
+    base0B = "BCDF59";
+    base0C = "AEE8F4";
+    base0D = "49CAE4";
+    base0E = "A093E2";
+    base0F = "FF8787";
+  };
+  system = "base16";
+  variant = "dark";
+}

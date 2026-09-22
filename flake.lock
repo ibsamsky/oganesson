@@ -5,7 +5,7 @@
         "darwin": [],
         "home-manager": [],
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "systems": "systems"
       },
@@ -71,7 +71,7 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -191,7 +191,7 @@
           "flake-parts"
         ],
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -255,22 +255,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1789286504,
-        "narHash": "sha256-eiEK7cKZORNEvX0GeF3RtNEF/JXhgf2RqSp3230q13E=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ef34387ddd751e1ab8857adf4676492d32eb24ec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -304,7 +288,6 @@
         "mcdl": "mcdl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-small": "nixpkgs-small",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "treefmt-nix": "treefmt-nix_2",
         "wrappers": "wrappers"
       }
@@ -348,7 +331,7 @@
     "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {

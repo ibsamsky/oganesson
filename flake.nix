@@ -4,14 +4,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-26.05-small";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
         darwin.follows = "";
         home-manager.follows = "";
-        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     agenix-rekey = {
@@ -20,7 +19,7 @@
     };
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     hjem = {
@@ -31,12 +30,12 @@
       url = "github:ibsamsky/mcdl";
       inputs = {
         flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     wrappers = {
       url = "github:nix-community/nix-wrapper-modules";
@@ -64,30 +63,9 @@
 
       perSystem = { pkgs, ... }: {
         # TODO: move to GH workflow to run on a schedule (and be less stupid)
-        apps.update-schemes.program = pkgs.writeShellApplication {
-          name = "update-schemes";
-          runtimeInputs = [
-            pkgs.yaml2json
-            pkgs.jq
-          ];
-          text = ''
-            outdir="$(git rev-parse --show-toplevel)/data"
-            mkdir -p "$outdir"
-            tmpdir="$(mktemp -d)"
-            trap 'rm -rf "$tmpdir"' EXIT
-
-            for f in ${pkgs.base16-schemes}/share/themes/*.yaml; do
-              name="$(basename "$f" .yaml)"
-              yaml2json < "$f" > "$tmpdir/$name.json"
-            done
-
-            jq -n -S '
-              [inputs | {(input_filename | split("/") | last | rtrimstr(".json")): .}] | add
-            ' "$tmpdir"/*.json > "$outdir/schemes.json"
-          '';
-        };
+        apps.update-schemes.program = pkgs.writers.writeNuBin "update-schemes" (
+          pkgs.replaceVars ./scripts/update-schemes.nu { base16_schemes = "${pkgs.base16-schemes}"; }
+        );
       };
-
-      flake.scheme = inputs.nixpkgs.lib.importJSON ./data/schemes.json;
     };
 }

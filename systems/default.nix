@@ -1,7 +1,11 @@
-{ self, inputs, ... }:
+{
+  lib,
+  self,
+  inputs,
+  ...
+}:
 
 let
-  inherit (inputs.nixpkgs-unstable) lib;
 
   defaultBuilder = inputs.nixpkgs.lib.nixosSystem;
   serverBuilder = inputs.nixpkgs-small.lib.nixosSystem;
