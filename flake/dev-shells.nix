@@ -6,6 +6,7 @@
         statix
 
         just
+        nushell
 
         config.agenix-rekey.package
       ];
