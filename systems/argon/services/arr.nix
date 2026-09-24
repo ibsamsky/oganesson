@@ -16,7 +16,7 @@ in
   users.groups.profilarr = { };
 
   virtualisation.oci-containers.containers.profilarr = {
-    image = "ghcr.io/dictionarry-hub/profilarr:2.1.0";
+    image = "ghcr.io/dictionarry-hub/profilarr:2.2.0";
     autoStart = true;
     ports = [ "6868:6868" ];
     volumes = [ "/var/lib/profilarr/config:/config" ];
