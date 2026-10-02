@@ -20,3 +20,7 @@ rebuild subcmd *args="":
 # build a vm image for the current host, independent of nixos-rebuild (e.g. for use on another machine)
 build-vm hostname=hostname:
     {{ nix }} build ".#nixosConfigurations.{{ hostname }}.config.system.build.vm"
+
+# run the build-vm image with nixGL (non-NixOS hosts only)
+run-vm hostname=hostname: (build-vm hostname)
+    {{ nix }} run github:nix-community/nixGL#nixGLIntel -- "./result/bin/run-{{ hostname }}-vm"
