@@ -25,6 +25,9 @@
     ];
   };
 
+  # save some space
+  fonts.fontconfig.enable = false;
+
   zramSwap.enable = true;
 
   boot.loader.systemd-boot = {

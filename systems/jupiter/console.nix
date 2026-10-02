@@ -14,6 +14,6 @@ in
     colors = mkColors "chalk";
     font = "cozette6x13";
 
-    packages = with pkgs; [ cozette ];
+    packages = [ pkgs.cozette ];
   };
 }

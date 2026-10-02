@@ -8,7 +8,7 @@
     verbosity = lib.mkDefault "crit";
   };
 
-  # useless because of bees
+  # useless (harmful?) because of bees
   nix.settings.auto-optimise-store = lib.mkForce false;
   nix.optimise.automatic = lib.mkForce false;
 }

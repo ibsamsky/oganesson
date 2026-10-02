@@ -20,8 +20,17 @@
       config = lib.mkIf cfg.enable {
         documentation.enable = false;
 
+        # only allow users in the wheel group to use sudo
+        security.sudo.execWheelOnly = lib.mkDefault true;
+        security.sudo.extraConfig = ''
+          Defaults lecture = never
+        '';
+
+        # prevent full /boot partition
+        boot.loader.grub.configurationLimit = lib.mkDefault 5;
+        boot.loader.systemd-boot.configurationLimit = lib.mkDefault 5;
+
         nix.settings = {
-          auto-optimise-store = false;
           min-free = lib.mkDefault (1024 * 1024 * 1024); # 1G
         };
 

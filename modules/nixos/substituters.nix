@@ -16,8 +16,14 @@
         # https://github.com/manic-systems/ncro
 
         nix.settings = {
-          substituters = [ "https://cark.cachix.org" ];
-          trusted-public-keys = [ "cark.cachix.org-1:Ze1WxAMGwBLypgd0qLqM2JIVTGSBPtVyreJyUu4UqXk=" ];
+          substituters = [
+            "https://cark.cachix.org"
+            "https://nix-community.cachix.org"
+          ];
+          trusted-public-keys = [
+            "cark.cachix.org-1:Ze1WxAMGwBLypgd0qLqM2JIVTGSBPtVyreJyUu4UqXk="
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
         };
       };
     };
