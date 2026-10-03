@@ -2,8 +2,8 @@
   description = "flakey flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-26.05-small";
+    nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+    nixpkgs-small.url = "https://channels.nixos.org/nixos-26.05-small/nixexprs.tar.zst";
 
     agenix = {
       url = "github:ryantm/agenix";
