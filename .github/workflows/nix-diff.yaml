@@ -1,0 +1,56 @@
+name: Nix diff
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+jobs:
+  nix-diff:
+    name: Dix diff
+
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # v1.0.0
+
+      - name: Nix version
+        run: nix --version
+
+      - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        with:
+          name: cark
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Discover NixOS configurations
+        id: hosts
+        run: |
+          set -euo pipefail
+
+          hosts_json="$(nix eval --json '.#nixosConfigurations' --apply builtins.attrNames --accept-flake-config)"
+          attributes="$(echo "$hosts_json" | jq -r '.[] | "- displayName: \(.)\n  attribute: nixosConfigurations.\(.).config.system.build.toplevel"')"
+
+          echo "Found configurations:"
+          echo "$attributes"
+
+          {
+            echo "attributes<<EOF"
+            echo "$attributes"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: natsukium/nix-diff-action@4091452e4c7b3c7ea4ecbaec84be7f0066d810d7 # v1.1.1
+        with:
+          attributes: ${{ steps.hosts.outputs.attributes }}
+          build: false
+          comment-strategy: update
+          skip-no-change: false
