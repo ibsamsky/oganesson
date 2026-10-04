@@ -8,8 +8,6 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
-        darwin.follows = "";
-        home-manager.follows = "";
         nixpkgs.follows = "nixpkgs";
       };
     };
