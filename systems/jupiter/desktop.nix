@@ -1,26 +1,14 @@
 { pkgs, ... }:
 
 {
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      options = "";
-    };
-  };
-
   xdg.portal = {
     enable = true;
   };
 
   # desktops/compositors
-  services.desktopManager.gnome.enable = true;
-  programs.niri = {
-    enable = true;
-    useNautilus = false;
+  services.desktopManager = {
+    cosmic.enable = true;
+    gnome.enable = true;
   };
 
   # fix niri-session environment setup from greetd

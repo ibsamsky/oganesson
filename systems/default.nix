@@ -34,8 +34,6 @@ in
             ];
           }
 
-          inputs.hjem.nixosModules.default
-
           (./. + "/${host}")
         ]
         ++ builtins.attrValues self.nixosModules;

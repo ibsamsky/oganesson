@@ -1,12 +1,21 @@
-{ lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
+    inputs.hjem.nixosModules.default
+
     ../../modules/nixos/mixins/btrfs.nix
+
     ./console.nix
     ./desktop.nix
     ./hardware-configuration.nix
     ./hjem
+
     # toggle vm-specific options, remove for bare metal
     ./vm.nix
   ];
