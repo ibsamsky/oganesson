@@ -10,8 +10,6 @@ on:
 
 jobs:
   nix-diff:
-    name: Dix diff
-
     runs-on: ubuntu-24.04
 
     permissions:

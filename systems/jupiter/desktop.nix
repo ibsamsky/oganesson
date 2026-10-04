@@ -1,15 +1,10 @@
 { pkgs, ... }:
 
 {
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      options = "";
-    };
+  # configure keyboard layout (X and Wayland)
+  services.xserver.xkb = {
+    layout = "us";
+    options = "";
   };
 
   xdg.portal = {
