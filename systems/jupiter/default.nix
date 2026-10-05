@@ -69,7 +69,7 @@
   time.timeZone = "America/New_York";
 
   # allow unfree packages as needed
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
 
   programs = {
     firefox = {
@@ -85,6 +85,7 @@
 
     vscode = {
       enable = true;
+      package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
     };
   };
