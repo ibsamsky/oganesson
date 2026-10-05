@@ -1,0 +1,27 @@
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font", monospace;
+  font-size: 12px;
+}
+
+window#waybar {
+  background: rgba(40, 42, 46, 0.9);
+  color: #c5c8c6;
+}
+
+#clock,
+#wireplumber,
+#network,
+#battery,
+#tray {
+  padding: 0 10px;
+}
+
+#battery.charging {
+  color: #f0c674;
+}
+
+#battery.warning,
+#battery.critical {
+  color: #a54242;
+}

@@ -111,7 +111,10 @@
     isNormalUser = true;
     # TODO: agenix + hashedPasswordFile
     initialHashedPassword = "$y$j9T$GOa6jtaMbTB.dmg1JCbk51$gsCZ1jTjhZzTCnIfTtEphlfJKp1i1rHCDpWXg4VDq61";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’
+    extraGroups = [
+      "video" # brightnessctl
+      "wheel" # Enable ‘sudo’
+    ];
     packages = [ ];
   };
 
@@ -142,6 +145,7 @@
     eza
     fd
     intel-media-driver
+    nh
     nix-direnv
     ripgrep
     vpl-gpu-rt

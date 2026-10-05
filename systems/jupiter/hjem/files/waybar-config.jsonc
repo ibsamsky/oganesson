@@ -1,0 +1,40 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "modules-left": ["custom/logo", "niri/workspaces"],
+  "modules-right": ["tray", "network", "wireplumber", "battery", "clock"],
+  "custom/logo": {
+    "format": ""
+  },
+  "niri/workspaces": {
+      "format": "{icon}",
+      "workspace-taskbar": {
+          "enable": true,
+          "icon-size": 18
+      }
+  },
+  "clock": {
+    "format": "{:%a %d %b %H:%M}",
+    "tooltip-format": "{:%Y-%m-%d %H:%M:%S %Z}"
+  },
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "muted",
+    "format-icons": ["", "", ""]
+  },
+  "network": {
+    "format-wifi": "{essid} {signalStrength}%",
+    "format-ethernet": "{ifname}",
+    "format-disconnected": "offline",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "tray": {
+    "spacing": 8
+  }
+}
