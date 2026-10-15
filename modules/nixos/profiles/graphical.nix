@@ -1,9 +1,11 @@
-{ lib, moduleWithSystem, ... }:
-
 {
-  flake.nixosModules.default = moduleWithSystem (
-    { pkgs, ... }:
-    { config, ... }:
+  flake.nixosModules.default =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       cfg = config.oganesson.profiles.graphical;
     in
@@ -27,6 +29,5 @@
           ];
         };
       };
-    }
-  );
+    };
 }

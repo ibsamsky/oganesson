@@ -1,12 +1,12 @@
 # TODO: use `nh` instead
-{ lib, moduleWithSystem, ... }:
-
 {
-  flake.nixosModules.default = moduleWithSystem (
-    # perSystem args
-    { pkgs, ... }:
-    # normal module args
-    { config, ... }:
+  flake.nixosModules.default =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       cfg = config.oganesson.activation-diff;
     in
@@ -24,6 +24,5 @@
           '';
         };
       };
-    }
-  );
+    };
 }
