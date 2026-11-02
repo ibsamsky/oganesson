@@ -45,5 +45,32 @@ in
   services.radarr.enable = true;
   services.sonarr.enable = true;
 
-  # TODO: restic backup for config dirs (also pay for backblaze)
+  age.secrets.arr-restic-password = {
+    rekeyFile = ../secrets/arr-restic-password.age;
+    generator.script = "alnum";
+  };
+
+  age.secrets.b2-restic-env.rekeyFile = ../../../secrets/b2-restic-env.age;
+
+  services.restic.backups.arr = {
+    initialize = true;
+    paths = [
+      "/var/lib/profilarr/config"
+      svc.prowlarr.dataDir
+      svc.radarr.dataDir
+      svc.sonarr.dataDir
+      # seerr uses DynamicUser, so systemd stores its state under /var/lib/private
+      "/var/lib/private/seerr"
+    ];
+    repository = "s3:s3.us-east-005.backblazeb2.com/cark-mxsxppghej/argon-arr";
+    environmentFile = config.age.secrets.b2-restic-env.path;
+    passwordFile = config.age.secrets.arr-restic-password.path;
+    timerConfig.OnCalendar = "daily";
+    pruneOpts = [
+      "--max-unused 5%"
+      "--keep-daily 7"
+      "--keep-weekly 4"
+      "--keep-monthly 6"
+    ];
+  };
 }

@@ -12,11 +12,13 @@
   programs.nix-ld.enable = true;
 
   age.secrets.mcdl-restic-password.rekeyFile = ./secrets/mcdl-restic-password.age;
+  age.secrets.b2-restic-env.rekeyFile = ../../secrets/b2-restic-env.age;
 
   services.restic.backups.mcdl = {
     initialize = true;
     paths = [ "/root/.local/share/mcdl/instance" ];
-    repository = "sftp:neon-backup@pve.cloudforest-alewife.ts.net:/mnt/data/mc/neon-mcdl";
+    repository = "s3:s3.us-east-005.backblazeb2.com/cark-mxsxppghej/neon-mcdl";
+    environmentFile = config.age.secrets.b2-restic-env.path;
     passwordFile = config.age.secrets.mcdl-restic-password.path;
     timerConfig.OnCalendar = "daily";
     pruneOpts = [
