@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   services.tailscale.enable = true;
 
@@ -16,12 +14,6 @@
   services.caddy = {
     enable = true;
     openFirewall = true;
-
-    package = pkgs.caddy.withPlugins {
-      # "github.com/caddyserver/cache-handler@v0.16.0"
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];
-      hash = "sha256-xRJ5evsAJ2akg47j3Bt6YDXJOgX88B/rKNP50KSVyNY=";
-    };
   };
 
   services.fail2ban = {
